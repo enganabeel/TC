@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!--<menuitem id="employee_attendance_report"
+                  parent="menu_hr_employee_payroll"
+                  sequence="100"
+                  action="action_attendance_report"
+                  name="Attendance report"
+	  />-->
+
+      <record id="action_attendance_report" model="ir.actions.act_window">
+            <field name="name">Attendance report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.attendance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="help" type="html">
+                <p>
+                    create
+                </p>
+            </field>
+    </record>
+     <menuitem id="employee_attendance_report"
+	parent="hr.menu_hr_employee_payroll"
+	sequence="100"
+	action="action_attendance_report"
+	name="Attendance report"
+	       />
+
+ <record id="view_form" model="ir.ui.view">
+            <field name="name">report.attendance.form</field>
+            <field name="model">report.attendance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <Group>
+                             <field name="choose_branch" options="{'horizontal': true}" class="oe_edit_only" widget="radio"/>
+                            <field name="dat"/>
+                            <field name="date_end"/>
+                            <field name="choose_option"/>
+                            <field name="employee_id" attrs="{'required':['&amp;',('choose_option','=','b'),('choose_branch','=','a')],'invisible': ['|','|',('choose_branch','!=','a'),('choose_option', '=', 'a'),('choose_option', '=', 'c')]}" domain="[('choose_branch','=','a')]" />
+                            <field name="employee_id_Madina" attrs="{'required':['&amp;',('choose_option','=','b'),('choose_branch','=','b')],'invisible': ['|','|',('choose_branch','!=','b'),('choose_option', '=', 'a'),('choose_option', '=', 'c')]}" domain="[('choose_branch','=','b')]" />
+                            <field name="choose_group" attrs="{'required':[('choose_option','=','c')],'invisible': ['|','|',('choose_option', '=', 'a'),('choose_branch', '=', 'b'),('choose_option', '=', 'b')]}"/>
+                            <field name="choose_shift" attrs="{'required':[('choose_option','=','c')],'invisible': ['|','|',('choose_option', '=', 'a'),('choose_branch', '=', 'a'),('choose_option', '=', 'b')]}"/>
+                        </Group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+ <record id="einv_tour_account_move_view_form" model="ir.ui.view">
+            <field name="name">hr.employee.attend_report</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+	    <field name="arch" type="xml">
+		<xpath expr="//field[@name='coach_id']" position="after">
+		    <field name="choose_branch" options="{'horizontal': true}" class="oe_edit_only" widget="radio"  groups="base.group_no_one"/>
+
+		    <field name="choose_shift" attrs="{'invisible':[('choose_branch','!=','b')]}"/>
+		    <field name="group_name" attrs="{'invisible':[('choose_branch','!=','a')]}" />
+                    <field name="biometric_id"/>
+                </xpath>
+        </field>
+ </record>
+</odoo>

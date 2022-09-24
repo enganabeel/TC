@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hotel_create_lines,access.hotel.create.lines,model_hotel_create_lines,,1,1,1,1
+access_visas_create_lines,access.visas.create.lines,model_visas_create_lines,,1,1,1,1
+access_account_country,access.account.country,model_account_country,,1,1,1,1
